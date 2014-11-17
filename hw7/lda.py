@@ -291,15 +291,13 @@ class Sampler:
 
         if old_topic != -1:
             assert new_topic == -1
-            
-            # TODO: Add code here to keep track of the counts and
-            # assignments
+            self._doc_assign[doc][index] = -1
+            self._topics.change_count(old_topic, term, -1)
 
         if new_topic != -1:
             assert old_topic == -1
-
-            # TODO: Add code here to keep track of the counts and
-            # assignments
+            self._doc_assign[doc][index] = new_topic
+            self._topics.change_count(new_topic, term, 1)
 
     def run_sampler(self, iterations = 100):
         """
