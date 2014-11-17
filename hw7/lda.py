@@ -359,14 +359,14 @@ class Sampler:
         sample_probs = {}
         term = self._doc_tokens[doc_id][index]
         for kk in xrange(self._num_topics):
-
-            # TODO: Compute the conditional probability of
-            # sampling a topic; at the moment it's just the
-            # uniform probability.
-            sample_probs[kk] = 1.0 / float(self._num_topics)
-
+            doc_tokens = self._doc_assign[doc_id]
+            num_topics = self._num_topics
+            alpha = self._alpha[kk]
+            val = float(doc_tokens.count(kk) + alpha)
+            val /= float(len(doc_tokens)-doc_tokens.count(-1) + num_topics*alpha)
+            val *= self._topics.word_in_topic(kk, term)
+            sample_probs[kk] = val
         return sample_probs
-        
 
     def sample_doc(self, doc_id, debug=False):
         """
