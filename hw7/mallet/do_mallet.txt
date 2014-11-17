@@ -1,0 +1,33 @@
+=== Do mallet
+a. Read: http://mallet.cs.umass.edu/topics.php
+
+b.l do the followings for topic modeling by mallet
+
+$ bin/mallet import-dir --input ~/Dev/cl1-hw/hw7/wiki \
+--output wiki.mallet --keep-sequence --remove-stopwords
+$ bin/mallet train-topics --input wiki.mallet --num-topics 10 \
+--num-iterations 5000 --output-state topic-state.gz
+$ gunzip topic-state.gz
+
+c. analyze the result, topic-state
+
+=== Result
+a. The above command took 29 sec (5000 iterations)
+
+<5000> LL/token: -9.39462
+
+Total time: 28 seconds
+
+real0m28.896s
+user0m29.636s
+sys0m0.028s
+
+b. 10000 iterations took about 2min
+
+<10000> LL/token: -9.37818
+
+Total time: 56 seconds
+
+real0m56.292s
+user0m29r0m57.056s
+sys0m0.060s
